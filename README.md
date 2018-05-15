@@ -2,7 +2,7 @@
 
 This is a tool for making CentOS7 ISO of yourself.
 
-This only works for CentOS-7-1611. For other version such as 1511 and 1708, and the other linux distributions, please wait for more time.
+This only works for CentOS-7-1611. For other version such as 1511, 1708, 1804, and other linux distributions, please wait for more time.
 
 ## Requirement
 
@@ -17,7 +17,7 @@ Basic order：
 
 1. Modify the GLOBAL VARIABLE
 2. Copy addtional files you want to install after the system installation to PAYLOAD_PATH. Write a install.sh as the install script.
-3. Run makeiso3.sh to generate iso-file.
+3. Run makeiso.sh to generate iso file.
 
 ### GLOBAL VARIABLE
 
@@ -41,7 +41,7 @@ FINALNAME=${VOLUMENAME}.iso
 ### Usage
 
 ```
-Usage: ./makeiso3.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLOAD_PATH=/root/payload_test/]
+Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLOAD_PATH=/root/payload_test/]
 ```
 
 And you will get a ISO file. The default username/password is root/root.
@@ -181,6 +181,8 @@ This one only works for centos7-1611. The year of 1611 is the year Galileo made 
 
 I folk project to another team of my company ,and named it 'Payload'. This word means a container, and in game Overwatch, it means vehicle to be escorted. The main idea is this directory is used for containing 3rd-party code.
 
-But! Yes there is a But(not butt). The word 'Payload' in Team Fortress 2 also means BOMB! Because after I read the code and the project of the other team, I thought those would be a BOMB, it would explode at anytime. ["Bomb is friend! Come, visit friend!"](https://wiki.teamfortress.com/w/images/2/2b/Heavy_cartstaycloseoffense06.wav)
+Butt weight, The word 'Payload' in Team Fortress 2 also means BOMB! Because after I read the code and the project of the other team, I thought those would be a BOMB, it would explode at anytime. ["Bomb is friend! Come, visit friend!"](https://wiki.teamfortress.com/w/images/2/2b/Heavy_cartstaycloseoffense06.wav)
 
 ## License
+
+MIT License

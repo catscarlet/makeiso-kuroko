@@ -171,3 +171,19 @@ Usage: ./makeiso3.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLO
 对于需要修改 CentOS7 安装光盘的依赖环境的，需要首先在新环境下安装 CentOS7，并使用 generatefilelist.sh 生成新的 rpm filelist，并更新 kickstart 和 comps.xml （或者干脆写到 Payload 的 install.sh 中。 It's fine.）。
 
 项目自带 CentOS-7-x86_64-Everything-1611 的 comps.xml 文件，酌情使用。
+
+## 其他
+
+### 项目名 Kuroko
+
+此项目只支持生成基于 CentOS 7.3.1611 版本。 公历年 1611 是伽利略发表对太阳黑子观察相关的年份。黑子。
+
+### 目录名 Payload
+
+我将这个项目 folk 给了公司的另一个项目组，并给这个目录取名 Payload 。Payload 意思是装载，在游戏 守望先锋 中，一般都是指 推车。这个目录的意思就是用来承载第三方的额外包。
+
+但是，Payload 在游戏 TF2 中意味着 Bomb。我看了另一个组的代码之后，我觉得这就是个 Bomb ["Bomb is friend! Come, visit friend!"](https://wiki.teamfortress.com/w/images/2/2b/Heavy_cartstaycloseoffense06.wav)
+
+## License
+
+MIT License
