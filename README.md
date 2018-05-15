@@ -1,4 +1,4 @@
-# PAYLOAD MAKE ISO
+# Makeiso KUROKU
 
 This is a tool for making CentOS7 ISO of yourself.
 
