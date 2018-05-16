@@ -81,7 +81,7 @@ xargs -n 1 -i cp -rs /tmp/mountpoint/CentOS7-Everything/{} ./iso_tmp < ./filelis
 
 echo -e 'Copy(Actually it'"'"'s "make symbolic links") minimal packages from CentOS7 DVD'
 #rsync -a --info=progress2 --files-from=./filelist/minimal.list /tmp/mountpoint/CentOS7-Everything/Packages ./iso_tmp/Packages
-xargs -n 1 -i cp -s /tmp/mountpoint/CentOS7-Everything/Packages/{} ./iso_tmp/Packages < ./filelist/payload_dependence.list
+xargs -n 1 -i cp -s /tmp/mountpoint/CentOS7-Everything/Packages/{} ./iso_tmp/Packages < ./filelist/minimal.list
 
 echo 'Copy rsync-3.1.2-5.fc26.x86_64.rpm'
 rsync -a --info=progress2 rsync-3.1.2-5.fc26.x86_64.rpm ./iso_tmp/Packages
