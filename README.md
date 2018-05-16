@@ -1,4 +1,4 @@
-# Makeiso KUROKU
+# Makeiso Kuroko
 
 This is a tool for making CentOS7 ISO of yourself.
 
@@ -6,10 +6,11 @@ This only works for CentOS-7-1611. For other version such as 1511, 1708, 1804, a
 
 ## Requirement
 
-- genisoimage
-- createrepo
+- An avaliable Linux platform. CentOS 7 is prefered, but Ubuntu is also OK
 - A CentOS-7-x86_64-Everything-1611.iso image
-- rsync 3.1.1+
+- genisoimage (A RPM package is included in Everything 1611 iso image)
+- createrepo (A RPM package is included in Everything 1611 iso image)
+- rsync 3.1.1+ (not included in Everything 1611 iso image, but A RPM package is included in this repo)
 
 ## Usage
 
@@ -23,11 +24,13 @@ Basic order：
 
 ```
 # INPUT
+
 CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso"
 PAYLOAD_PATH="/root/payload_test/"
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
+
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
 VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
@@ -36,7 +39,7 @@ FINALNAME=${VOLUMENAME}.iso
 ```
 
 - **CENTOS7_EVERYTHING_ISO** MUST be a accessiable CentOS-7-x86_64-Everything-1611.iso files.
-- **PAYLOAD_PATH** is addtional files you want to install after the system installation. After the system installation and auto reboot, `install.sh` will be execute automatically once.
+- **PAYLOAD_PATH** is addtional files you want to install after the system installation. After the system installation and auto reboot, `bash install.sh` will be execute automatically once.
 
 ### Usage
 

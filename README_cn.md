@@ -1,4 +1,4 @@
-# Makeiso KUROKU
+# Makeiso Kuroko
 
 这是用于打包 ISO 的工具
 
@@ -6,10 +6,11 @@
 
 ## 依赖
 
-- genisoimage
-- createrepo
-- CentOS-7-x86_64-Everything-1611.iso 镜像
-- rsync 3.1.1+
+- 可用的 Linux 操作系统，建议使用 CentOS 7 ，不过 Ubuntu 也没差
+- CentOS-7-x86_64-Everything-1611.iso 光盘镜像
+- genisoimage （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
+- createrepo （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
+- rsync 3.1.1+ （不包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中，但是这个仓库包含了一个 3.1.2 版本的 RPM 包）
 
 ## 使用方式
 
@@ -29,6 +30,7 @@ PAYLOAD_PATH="/root/payload_test/"
 CONFIGDIR='boot.template/develop/'
 
 # 输出
+
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
 VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
@@ -37,7 +39,7 @@ FINALNAME=${VOLUMENAME}.iso
 ```
 
 - **CENTOS7_EVERYTHING_ISO** 必须指定为可访问的 CentOS-7-x86_64-Everything-1611.iso
-- **PAYLOAD_PATH** 为将要在系统安装完成后安装的包。在目的机系统安装并重启后，会执行一次 `install.sh`
+- **PAYLOAD_PATH** 为将要在系统安装完成后安装的包。在目的机系统安装并重启后，会执行一次 `bash install.sh`
 
 ### 调用
 
