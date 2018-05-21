@@ -81,8 +81,8 @@ Usage: ./makeiso3.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLO
 
 - payload-develop.cfg ，Kickstart文件，包括系统自动安装的细节设定，系统语言，网络设置，root密码 等。系统重启后会调用的脚本也包含在内。
 - centos_dvd_frame.list ，CentOS7 光盘框架基础文件
-- payload_dependence.list ，所有需要从 Everything光盘 中获取的 RPM 包
-- generatefilelist.sh ，用于从已有环境获取 RPM 包列表并与 Everything 光盘比对的脚本，可用于生成 payload_dependence.list
+- minimal.list ，所有需要从 Everything光盘 中获取的 RPM 包
+- generatefilelist.sh ，用于从已有环境获取 RPM 包列表并与 Everything 光盘比对的脚本，可用于生成 `your_rpm_payload.list`. **注意 MBR 和 EFI 之间是有区别的！**
 
 ### ISO
 
@@ -178,7 +178,7 @@ Usage: ./makeiso3.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLO
 
 ### 项目名 Kuroko
 
-此项目只支持生成基于 CentOS 7.3.1611 版本。 公历年 1611 是伽利略发表对太阳黑子观察相关的年份。黑子。
+此项目只支持生成基于 CentOS 7.3.1611 版本。 公历年 1611 是伽利略发表对太阳黑子观察相关的年份。于是取名白井黑子。
 
 ### 目录名 Payload
 

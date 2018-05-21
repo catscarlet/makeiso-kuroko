@@ -10,7 +10,7 @@ This only works for CentOS-7-1611. For other version such as 1511, 1708, 1804, a
 - A CentOS-7-x86_64-Everything-1611.iso image
 - genisoimage (A RPM package is included in Everything 1611 iso image)
 - createrepo (A RPM package is included in Everything 1611 iso image)
-- rsync 3.1.1+ (not included in Everything 1611 iso image, but A RPM package is included in this repo)
+- rsync 3.1.1+ (not included in Everything 1611 iso image, but A RPM package is included in this repository)
 
 ## Usage
 
@@ -81,8 +81,8 @@ Notice that I enabled all the network interface DHCP in kickstart-post-script, s
 
 - payload-develop.cfg, Kickstart files, including how to install automatically, the system language, network, root password, etc, A script which will executing after system installation and reboot is also included.
 - centos_dvd_frame.list , CentOS-7-1611 DVD frameware files.
-- payload_dependence.list , RPM Package needed from Everything-DVD
-- generatefilelist.sh , Diff 'installed RPM Package' between the current environment and Everything-DVD. This can be used to generate payload_dependence.list
+- minimal.list , RPM Package needed from Everything-DVD
+- generatefilelist.sh , Diff 'installed RPM Package' between the current environment and Everything-DVD. This can be used to generate `your_rpm_payload.list`. **Notice that there is difference between MBR as EFI.**
 
 ### ISO
 
