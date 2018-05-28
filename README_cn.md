@@ -188,4 +188,9 @@ Usage: ./makeiso3.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLO
 
 ## License
 
-MIT License
+Makeiso-Kuroko 使用 MIT License。
+
+默认背景图片来自：["Toaru Kagaku no Railgun - Shirai Kuroko" by Krukmeister]( https://krukmeister.deviantart.com/art/Toaru-Kagaku-no-Railgun-Shirai-Kuroko-369206997) 并且其 License 为
+[Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 License](http://creativecommons.org/licenses/by-nc-nd/3.0/).
+
+如果您出于 **商业目的** 使用本项目， 您应该 **移除** 或 **替换** 默认背景图片。
