@@ -188,4 +188,9 @@ Butt weight, The word 'Payload' in Team Fortress 2 also means BOMB! Because afte
 
 ## License
 
-MIT License
+Makeiso-Kuroko is licensed under MIT License.
+
+The default splash image is from ["Toaru Kagaku no Railgun - Shirai Kuroko" by Krukmeister]( https://krukmeister.deviantart.com/art/Toaru-Kagaku-no-Railgun-Shirai-Kuroko-369206997) and it's licensed under a
+[Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 License](http://creativecommons.org/licenses/by-nc-nd/3.0/).
+
+If you want to use this project for **commercial purposes**, you should **remove** or **replace** the default splash image.

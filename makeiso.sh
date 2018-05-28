@@ -93,7 +93,8 @@ echo 'Copy boot files'
 rsync -a --info=progress2 $CONFIGDIR/ ./iso_tmp/
 sed -i 's/{$TITLE}/'$VOLUMENAME'/' ./iso_tmp/isolinux/isolinux.cfg
 sed -i 's/{$TITLE}/'$VOLUMENAME'/' ./iso_tmp/EFI/BOOT/grub.cfg
-#sed -ie 's/{$VOLUMENAME_SHORT}/'$VOLUMENAME_SHORT'/' ./iso_tmp/isolinux/isolinux.cfg
+#sed -i 's/{$VOLUMENAME_SHORT}/'$VOLUMENAME_SHORT'/' ./iso_tmp/isolinux/isolinux.cfg
+sed -i 's/{$VOLUMENAME_SHORT}/'$VOLUMENAME_SHORT'/' ./iso_tmp/EFI/BOOT/grub.cfg
 
 echo 'Create CentOS7 comps.xml'
 rsync -a --info=progress2 83b61f9495b5f728989499479e928e09851199a8846ea37ce008a3eb79ad84a0-c7-minimal-x86_64-comps.xml ./iso_tmp/repodata
