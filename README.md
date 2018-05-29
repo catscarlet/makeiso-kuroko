@@ -186,6 +186,11 @@ I folk project to another team of my company ,and named it 'Payload'. This word 
 
 Butt weight, The word 'Payload' in Team Fortress 2 also means BOMB! Because after I read the code and the project of the other team, I thought those would be a BOMB, it would explode at anytime. ["Bomb is friend! Come, visit friend!"](https://wiki.teamfortress.com/w/images/2/2b/Heavy_cartstaycloseoffense06.wav)
 
+## References
+
+- [GRUB 2 Custom Splash Screen on RHEL 7 UEFI and Legacy ISO Image](http://www.tuxfixer.com/set-grub2-custom-splash-screen-on-rhel-7-centos-7-uefi-and-legacy-bios-iso-image/)
+- [Grub2/Displays](https://help.ubuntu.com/community/Grub2/Displays#Troubleshooting_Splash_Images)
+
 ## License
 
 Makeiso-Kuroko is licensed under MIT License.
