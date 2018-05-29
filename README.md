@@ -44,7 +44,7 @@ FINALNAME=${VOLUMENAME}.iso
 ### Usage
 
 ```
-Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLOAD_PATH=/root/payload_test/]
+Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_test/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso]
 ```
 
 And you will get a ISO file. The default username/password is root/root.

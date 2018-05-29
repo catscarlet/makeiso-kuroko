@@ -44,7 +44,7 @@ FINALNAME=${VOLUMENAME}.iso
 ### 调用
 
 ```
-Usage: ./makeiso3.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0.test] -s [PAYLOAD_PATH=/root/payload_test/]
+Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_test/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso]
 ```
 
 之后你就会得到一个 ISO 文件。默认账号密码为 root/root。

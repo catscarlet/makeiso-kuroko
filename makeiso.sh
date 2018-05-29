@@ -19,7 +19,7 @@ FINALNAME=${VOLUMENAME}.iso
 
 usage()
 {
-    echo "Usage: $0 -d [DEST_DIR=$OUTPUTFILEDIR] -v [RELEASE_VERSION=$VERSION] -s [PAYLOAD_PATH=$PAYLOAD_PATH]" >&2
+    echo "Usage: $0 -d [DEST_DIR=$OUTPUTFILEDIR] -v [RELEASE_VERSION=$VERSION] -s [PAYLOAD_PATH=$PAYLOAD_PATH] -7 [CENTOS7_EVERYTHING_ISO=$CENTOS7_EVERYTHING_ISO]" >&2
     exit 1
 }
 
@@ -34,6 +34,9 @@ do
             ;;
         s)
             PAYLOAD_PATH=$OPTARG
+            ;;
+        7)
+            CENTOS7_EVERYTHING_ISO=$OPTARG
             ;;
         h)
             usage
