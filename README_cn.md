@@ -1,23 +1,23 @@
 # Makeiso Kuroko
 
-这是用于打包 ISO 的工具
+这是用于打包 ISO 的工具。
 
-本脚本只针对于 CentOS-7-1611.其他版本比如 1511 ， 1708 ，和其他发行版，敬请期待。
+本脚本只针对于 CentOS-7.3.1611，其他版本比如 1708、1804，以及其他发行版，敬请期待。
 
 ## 依赖
 
-- 可用的 Linux 操作系统，建议使用 CentOS 7 ，不过 Ubuntu 也没差
+- 可用的 Linux 操作系统。建议使用 CentOS 7 ，不过 Ubuntu 也没差
 - CentOS-7-x86_64-Everything-1611.iso 光盘镜像
 - genisoimage （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
 - createrepo （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
-- rsync 3.1.1+ （不包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中，但是这个仓库包含了一个 3.1.2 版本的 RPM 包）
+- rsync 3.1.1+ （不包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中，这个仓库包含了一个 3.1.2 版本的 RPM 包）
 
 ## 使用方式
 
 一般顺序：
 
 1. 修改全局变量
-2. 将需要安装的额外文件放入 PAYLOAD_PATH ，编写一个 install.sh 用于在目的机上安装
+2. 将需要安装的额外文件放入 `PAYLOAD_PATH`，并编写一个 install.sh 用于在目的机上安装
 3. 执行 makeiso3.sh 生成 iso 文件
 
 ### 全局变量

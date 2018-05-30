@@ -2,22 +2,22 @@
 
 This is a tool for making CentOS7 ISO of yourself.
 
-This only works for CentOS-7-1611. For other version such as 1511, 1708, 1804, and other linux distributions, please wait for more time.
+This only works for CentOS-7.3.1611. For other version such as 1708, 1804, and other linux distributions, please wait for more time.
 
 ## Requirement
 
-- An avaliable Linux platform. CentOS 7 is prefered, but Ubuntu is also OK
+- An avaliable Linux platform. CentOS 7 is prefered, but Ubuntu is also OK.
 - A CentOS-7-x86_64-Everything-1611.iso image
 - genisoimage (A RPM package is included in Everything 1611 iso image)
 - createrepo (A RPM package is included in Everything 1611 iso image)
-- rsync 3.1.1+ (not included in Everything 1611 iso image, but A RPM package is included in this repository)
+- rsync 3.1.1+ (not included in Everything 1611 iso image. A RPM package is included in this repository)
 
 ## Usage
 
-Basic order：
+Basic order:
 
 1. Modify the GLOBAL VARIABLE
-2. Copy addtional files you want to install after the system installation to PAYLOAD_PATH. Write a install.sh as the install script.
+2. Copy addtional files you want to install after the system installation to `PAYLOAD_PATH`, and write a install.sh as the installation script.
 3. Run makeiso.sh to generate iso file.
 
 ### GLOBAL VARIABLE
