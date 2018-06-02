@@ -14,6 +14,8 @@ CONFIGDIR='boot.template/develop/'
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
 VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+
+# AUTO VARIABLE
 VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 
@@ -23,7 +25,7 @@ usage()
     exit 1
 }
 
-while getopts "d:v:s:h" arg
+while getopts "d:v:s:7:h" arg
 do
     case $arg in
         d)

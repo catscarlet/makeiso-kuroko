@@ -16,7 +16,7 @@ This only works for CentOS-7.3.1611. For other version such as 1708, 1804, and o
 
 Basic order:
 
-1. Modify the GLOBAL VARIABLE
+1. Modify the GLOBAL VARIABLE if needed.
 2. Copy addtional files you want to install after the system installation to `PAYLOAD_PATH`, and write a install.sh as the installation script.
 3. Run makeiso.sh to generate iso file.
 
@@ -24,22 +24,23 @@ Basic order:
 
 ```
 # INPUT
-
 CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso"
 PAYLOAD_PATH="/root/payload_test/"
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
-
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
 VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+
+# AUTO VARIABLE
 VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 ```
 
 - **CENTOS7_EVERYTHING_ISO** MUST be a accessiable CentOS-7-x86_64-Everything-1611.iso files.
 - **PAYLOAD_PATH** is addtional files you want to install after the system installation. After the system installation and auto reboot, `bash install.sh` will be execute automatically once.
+- **VOLUMENAME_SHORT** is for Volume ID and it only support as long as 16 chars.
 
 ### Usage
 
@@ -173,6 +174,8 @@ Anything doesn't relate to the CentOS-7-x86_64-Everything ISO is supposed to be 
 For something relates to the ISO, you can install a new CentOS7 by yourself, and run generatefilelist.sh to generate new rpm filelist, and upgrade kickstart.cfg and comps.xml by yourself. (Or just edit it in the Payload install.sh. It's fine)
 
 This project includes a comps.xml `d918936f5019be3fb66e9981a28cb2a41477a2963d741d454f79377a22214f43-c7-x86_64-comps.xml`, as same as CentOS-7-x86_64-Everything-1611. You should build your own comps.xml and kickstart.cfg for your project.
+
+This project is just for helping developers who don't familiar how to buid a CentOS ISO. You should write Kickstart-file (payload-develop.cfg) for your own project purpose.
 
 ## Other things
 

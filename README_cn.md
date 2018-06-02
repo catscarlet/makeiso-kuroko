@@ -23,23 +23,24 @@
 ### 全局变量
 
 ```
-# 输入
-
+# INPUT
 CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso"
 PAYLOAD_PATH="/root/payload_test/"
 CONFIGDIR='boot.template/develop/'
 
-# 输出
-
+# OUTPUT
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
 VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+
+# AUTO VARIABLE
 VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 ```
 
 - **CENTOS7_EVERYTHING_ISO** 必须指定为可访问的 CentOS-7-x86_64-Everything-1611.iso
 - **PAYLOAD_PATH** 为将要在系统安装完成后安装的包。在目的机系统安装并重启后，会执行一次 `bash install.sh`
+- **VOLUMENAME_SHORT** 是卷标，最多支持16个字符
 
 ### 调用
 
@@ -173,6 +174,8 @@ Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PAT
 对于需要修改 CentOS7 安装光盘的依赖环境的，需要首先在新环境下安装 CentOS7，并使用 generatefilelist.sh 生成新的 rpm filelist，并更新 kickstart 和 comps.xml （或者干脆写到 Payload 的 install.sh 中。 It's fine.）。
 
 项目自带 CentOS-7-x86_64-Everything-1611 的 comps.xml 文件，酌情使用。
+
+本项目目的在于帮助对于不熟悉 CentOS 打 ISO 安装光盘的开发者学习和快速实现。您应该根据自己的项目需要，编写自己的 Kickstart 文件（payload-develop.cfg）。
 
 ## 其他
 
