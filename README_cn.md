@@ -32,6 +32,7 @@ CONFIGDIR='boot.template/develop/'
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
 VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+TIMEZONE='UTC'
 
 # AUTO VARIABLE
 VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
@@ -45,7 +46,7 @@ FINALNAME=${VOLUMENAME}.iso
 ### 调用
 
 ```
-Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_test/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso]
+Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_test/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
 ```
 
 之后你就会得到一个 ISO 文件。默认账号密码为 root/root。

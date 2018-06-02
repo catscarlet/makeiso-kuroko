@@ -14,6 +14,7 @@ CONFIGDIR='boot.template/develop/'
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
 VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+TIMEZONE='UTC'
 
 # AUTO VARIABLE
 VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
@@ -21,11 +22,11 @@ FINALNAME=${VOLUMENAME}.iso
 
 usage()
 {
-    echo "Usage: $0 -d [DEST_DIR=$OUTPUTFILEDIR] -v [RELEASE_VERSION=$VERSION] -s [PAYLOAD_PATH=$PAYLOAD_PATH] -7 [CENTOS7_EVERYTHING_ISO=$CENTOS7_EVERYTHING_ISO]" >&2
+    echo "Usage: $0 -d [DEST_DIR=$OUTPUTFILEDIR] -v [RELEASE_VERSION=$VERSION] -s [PAYLOAD_PATH=$PAYLOAD_PATH] -7 [CENTOS7_EVERYTHING_ISO=$CENTOS7_EVERYTHING_ISO] -z [TIMEZONE=$TIMEZONE]" >&2
     exit 1
 }
 
-while getopts "d:v:s:7:h" arg
+while getopts "d:v:s:7:z:h" arg
 do
     case $arg in
         d)
@@ -39,6 +40,9 @@ do
             ;;
         7)
             CENTOS7_EVERYTHING_ISO=$OPTARG
+            ;;
+        z)
+            TIMEZONE=$OPTARG
             ;;
         h)
             usage
@@ -100,6 +104,9 @@ sed -i 's/{$TITLE}/'$VOLUMENAME'/' ./iso_tmp/isolinux/isolinux.cfg
 sed -i 's/{$TITLE}/'$VOLUMENAME'/' ./iso_tmp/EFI/BOOT/grub.cfg
 #sed -i 's/{$VOLUMENAME_SHORT}/'$VOLUMENAME_SHORT'/' ./iso_tmp/isolinux/isolinux.cfg
 sed -i 's/{$VOLUMENAME_SHORT}/'$VOLUMENAME_SHORT'/' ./iso_tmp/EFI/BOOT/grub.cfg
+escaped_x="$(sed -e 's/[\/&]/\\&/g' <<< "$TIMEZONE")"
+ESCAPED_TIMEZONE="${escaped_x}"
+sed -i 's/{$TIMEZONE}/'$ESCAPED_TIMEZONE'/' ./iso_tmp/isolinux/payload-develop.cfg
 
 echo 'Create CentOS7 comps.xml'
 rsync -a --info=progress2 83b61f9495b5f728989499479e928e09851199a8846ea37ce008a3eb79ad84a0-c7-minimal-x86_64-comps.xml ./iso_tmp/repodata
