@@ -195,6 +195,10 @@ Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PAT
 - [GRUB 2 Custom Splash Screen on RHEL 7 UEFI and Legacy ISO Image](http://www.tuxfixer.com/set-grub2-custom-splash-screen-on-rhel-7-centos-7-uefi-and-legacy-bios-iso-image/)
 - [Grub2/Displays](https://help.ubuntu.com/community/Grub2/Displays#Troubleshooting_Splash_Images)
 
+## Contribution
+
+任何贡献都是受欢迎的. 请向 分支**dev** 发起 Pull request 。
+
 ## License
 
 Makeiso-Kuroko 使用 MIT License。

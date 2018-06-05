@@ -195,11 +195,15 @@ Butt weight, The word 'Payload' in Team Fortress 2 also means BOMB! Because afte
 - [GRUB 2 Custom Splash Screen on RHEL 7 UEFI and Legacy ISO Image](http://www.tuxfixer.com/set-grub2-custom-splash-screen-on-rhel-7-centos-7-uefi-and-legacy-bios-iso-image/)
 - [Grub2/Displays](https://help.ubuntu.com/community/Grub2/Displays#Troubleshooting_Splash_Images)
 
+## Contribution
+
+Any contributions are welcome. Pull request to branch **dev** please.
+
 ## License
 
 Makeiso-Kuroko is licensed under MIT License.
 
-The default splash image is from ["Toaru Kagaku no Railgun - Shirai Kuroko" by Krukmeister]( https://krukmeister.deviantart.com/art/Toaru-Kagaku-no-Railgun-Shirai-Kuroko-369206997) and it's licensed under a
+The default splash image is from ["Toaru Kagaku no Railgun - Shirai Kuroko" by Krukmeister](https://krukmeister.deviantart.com/art/Toaru-Kagaku-no-Railgun-Shirai-Kuroko-369206997) and it's licensed under a
 [Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 License](http://creativecommons.org/licenses/by-nc-nd/3.0/).
 
 If you want to use this project for **commercial purposes**, you should **remove** or **replace** the default splash image.
