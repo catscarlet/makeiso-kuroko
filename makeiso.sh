@@ -6,19 +6,14 @@ STARTTIME=`date +%s`
 cd $(dirname $(readlink -f $0))
 
 # INPUT
-CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/4.工具及安装包/系统镜像/CentOS-7-x86_64-Everything-1611.iso"
+CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso"
 PAYLOAD_PATH="/root/payload_test/"
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
 OUTPUTFILEDIR="./"
 VERSION="v1.0.0"
-VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
 TIMEZONE='UTC'
-
-# AUTO VARIABLE
-VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
-FINALNAME=${VOLUMENAME}.iso
 
 usage()
 {
@@ -53,6 +48,11 @@ do
             ;;
     esac
 done
+
+# AUTO VARIABLE
+VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
+FINALNAME=${VOLUMENAME}.iso
 
 # Check
 if [[ `createrepo --version 1>/dev/null 2>/dev/null` ]]; then

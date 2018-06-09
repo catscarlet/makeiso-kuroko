@@ -1,6 +1,6 @@
 # Makeiso Kuroko
 
-This is a tool for making CentOS7 ISO of yourself.
+This is a tool for making CentOS-7.3.1611 ISO of yourself.
 
 This only works for CentOS-7.3.1611. For other version such as 1708, 1804, and other linux distributions, please wait for more time.
 
