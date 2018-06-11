@@ -135,6 +135,9 @@ genisoimage \
     -o $OUTPUTFILEDIR/$FINALNAME \
     ./iso_tmp
 
+echo 'Umount /tmp/mountpoint/CentOS7-Everything/'
+umount /tmp/mountpoint/CentOS7-Everything/
+
 echo 'ISO is generated.'
 ls -l --color=auto $OUTPUTFILEDIR/$FINALNAME
 ENDTIME=`date +%s`
