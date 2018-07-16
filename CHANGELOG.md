@@ -1,3 +1,7 @@
+1.2.1  2018-06-16
+
+- Minor adjust.
+
 1.2 2018-06-03
 
 - Now boot splash screen is supported. Both Legacy(MBR) and EFI are supported.
