@@ -1,8 +1,8 @@
 # Makeiso Kuroko
 
-This is a tool for making CentOS-7.3.1611 ISO of yourself.
+This is a tool for making CentOS-7.3.1611 ISO for your own purpose.
 
-This only works for CentOS-7.3.1611. For other version such as 1708, 1804, and other linux distributions, please wait for more time.
+This only works for CentOS-7.3.1611.
 
 ## Requirement
 
@@ -17,7 +17,7 @@ This only works for CentOS-7.3.1611. For other version such as 1708, 1804, and o
 Basic order:
 
 1. Modify the GLOBAL VARIABLE if needed.
-2. Copy addtional files you want to install after the system installation to `PAYLOAD_PATH`, and write a install.sh as the installation script.
+2. Copy addtional files you want to install after the system installation to `PAYLOAD_PATH`, and write a install.sh as the installation script. Please notice **NO INTERACTIVE OPERATION IS ALLOWED**.
 3. Run makeiso.sh to generate iso file.
 
 ### GLOBAL VARIABLE
@@ -25,7 +25,7 @@ Basic order:
 ```
 # INPUT
 CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso"
-PAYLOAD_PATH="/root/payload_test/"
+PAYLOAD_PATH="/root/payload_sample/"
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
@@ -35,23 +35,23 @@ VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
 TIMEZONE='UTC'
 
 # AUTO VARIABLE
-VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
+VOLUMENAME_LABEL=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 ```
 
 - **CENTOS7_EVERYTHING_ISO** MUST be a accessiable CentOS-7-x86_64-Everything-1611.iso files.
 - **PAYLOAD_PATH** is addtional files you want to install after the system installation. After the system installation and auto reboot, `bash install.sh` will be execute automatically once.
-- **VOLUMENAME_SHORT** is for Volume ID and it only support as long as 16 chars.
+- **VOLUMENAME_LABEL** is for Volume ID and it only support as long as 16 chars.
 
 ### Usage
 
 ```
-Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_test/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
+Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_sample/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
 ```
 
-And you will get a ISO file. The default username/password is root/root.
+And you will get a ISO file. The default root password is 'makeiso-kuroko'.
 
-Notice that I enabled all the network interface DHCP in kickstart-post-script, so your network configuration in the Install Guide won't work.
+**Notice that all the network interfaces DHCP are enabled in kickstart-post-script. Your network configuration in the Install Guide won't work.**
 
 * * *
 
@@ -179,6 +179,10 @@ This project includes a comps.xml `d918936f5019be3fb66e9981a28cb2a41477a2963d741
 This project is just for helping developers who don't familiar how to buid a CentOS ISO. You should write Kickstart-file (payload-develop.cfg) for your own project purpose.
 
 ## Other things
+
+### Todo list
+
+- Print logs not only in log file, but also in tty.
 
 ### Idea about naming this 'make linux iso project' Kuroko
 

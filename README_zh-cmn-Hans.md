@@ -1,8 +1,8 @@
 # Makeiso Kuroko
 
-这是用于打包 ISO 的工具。
+这是用于制作属于你自己的 CentOS ISO 的工具。
 
-本脚本只针对于 CentOS-7.3.1611，其他版本比如 1708、1804，以及其他发行版，敬请期待。
+本脚本只针对于 CentOS-7.3.1611。
 
 ## 依赖
 
@@ -10,48 +10,59 @@
 - CentOS-7-x86_64-Everything-1611.iso 光盘镜像
 - genisoimage （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
 - createrepo （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
-- rsync 3.1.1+ （不包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中，这个仓库包含了一个 3.1.2 版本的 RPM 包）
+- rsync 3.1.1+ （不包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中，这个仓库中包含了一个 3.1.2 版本的 RPM 包）
 
 ## 使用方式
 
-一般顺序：
+推荐顺序：
 
 1. 修改全局变量
-2. 将需要安装的额外文件放入 `PAYLOAD_PATH`，并编写一个 install.sh 用于在目的机上安装
-3. 执行 makeiso3.sh 生成 iso 文件
+2. 将需要安装的额外文件放入 `PAYLOAD_PATH`，并编写一个 install.sh 用于在目的机上安装。**请注意不要包含任何交互性操作**。
+3. 执行 makeiso.sh 生成 iso 文件
 
 ### 全局变量
 
 ```
 # INPUT
-CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso"
-PAYLOAD_PATH="/root/payload_test/"
+CENTOS7_EVERYTHING_ISO='/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso'
+CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything/'
+PAYLOAD_PATH='./payload_sample/'
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
-OUTPUTFILEDIR="./"
-VERSION="v1.0.0"
-VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+OUTPUTFILEDIR='./'
+VERSION='v1.0.0'
 TIMEZONE='UTC'
 
-# AUTO VARIABLE
-VOLUMENAME_SHORT=`expr substr ${VOLUMENAME} 1 16`
+# Auto generated variables
+VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+VOLUMENAME_LABEL=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 ```
 
-- **CENTOS7_EVERYTHING_ISO** 必须指定为可访问的 CentOS-7-x86_64-Everything-1611.iso
-- **PAYLOAD_PATH** 为将要在系统安装完成后安装的包。在目的机系统安装并重启后，会执行一次 `bash install.sh`
-- **VOLUMENAME_SHORT** 是卷标，最多支持16个字符
+- **CENTOS7_EVERYTHING_ISO**: 必须指定为可访问的 CentOS-7-x86_64-Everything-1611.iso
+- **PAYLOAD_PATH**: 为将要在系统安装完成后安装的包。在目的机系统安装并重启后，会执行一次 `bash install.sh`
+- **VOLUMENAME_LABEL**: 卷标，最多支持16个字符
 
 ### 调用
 
 ```
-Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_test/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
+Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_sample/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
 ```
 
-之后你就会得到一个 ISO 文件。默认账号密码为 root/root。
+示例1：
 
-请注意我在 kickstart-post 脚本中启用了所有网口的 DHCP，所以在安装向导配置的网络属性都不会再重启后生效。
+`./makeiso.sh -7 /root/cifs/CentOS/CentOS-7-x86_64-Everything-1611.iso`
+
+示例2：
+
+`./makeiso.sh -d /root/ -v test20200331 -s ./payload_sample/ -7 /root/cifs/CentOS/CentOS-7-x86_64-Everything-1611/CentOS-7-x86_64-Everything-1611.iso -z 'Asia/Shanghai'`
+
+之后你就会得到一个 ISO 文件。默认 root 密码为 'makeiso-kuroko' 。
+
+**请注意，在 kickstart-post(payload-develop.cfg) 脚本中启用了所有网口的 DHCP。在安装向导配置的网络属性都不会在重启后生效。**
+
+**在 kickstart-post 中不包含任何关于安装位置的配置。安装时仍需手动选择安装位置**
 
 * * *
 
@@ -189,6 +200,10 @@ Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PAT
 我将这个项目 folk 给了公司的另一个项目组，并给这个目录取名 Payload 。Payload 意思是装载，在游戏 守望先锋 中，一般都是指 推车。这个目录的意思就是用来承载第三方的额外包。
 
 但是，Payload 在游戏 TF2 中意味着 Bomb。我看了另一个组的代码之后，我觉得这就是个 Bomb ["Bomb is friend! Come, visit friend!"](https://wiki.teamfortress.com/w/images/2/2b/Heavy_cartstaycloseoffense06.wav)
+
+### Todo list
+
+- 将输出显示到 tty，而不是仅仅保存于日志
 
 ## 参考资料
 
