@@ -1,5 +1,7 @@
 # Makeiso Kuroko
 
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+
 This is a tool for making CentOS-7.3.1611 ISO for your own purpose.
 
 This only works for CentOS-7.3.1611.

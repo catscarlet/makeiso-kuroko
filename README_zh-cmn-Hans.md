@@ -1,5 +1,7 @@
 # Makeiso Kuroko
 
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+
 这是用于制作属于你自己的 CentOS ISO 的工具。
 
 本脚本只针对于 CentOS-7.3.1611。
