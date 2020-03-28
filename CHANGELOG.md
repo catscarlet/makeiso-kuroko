@@ -1,3 +1,16 @@
+1.3.0 200-04-01
+
+A lot of things have changed since 1.2.1
+
+- The default root password is changed to 'makeiso-kuroko'
+- Grub timeout is 5 seconds now, both on BIOS mode and EFI mode
+- Add a payload sample for users to understand how it works
+- New splash screen image
+- Add many environment checking before trying to make iso
+- Add many prompting messages when making iso
+- Change License to Anti-996-License
+- Minor bug fixes
+
 1.2.1  2018-06-16
 
 - Minor adjust.
