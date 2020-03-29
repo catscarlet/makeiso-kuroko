@@ -72,7 +72,7 @@ FINALNAME=${VOLUMENAME}.iso
 # Before start. Check environment
 echo ''
 command -v rsync >/dev/null 2>&1 || { echo -e >&2 $RED'rsync is not installed.  Aborting.'$NC; exit 1; }
-command rsync -n --info=progress2 rsync-3.1.2-5.fc26.x86_64.rpm ${ISOTMP}/Packages >/dev/null 2>&1 || { echo -e >&2 $RED'This version of rsync is not supported. Version 3.1.1+ is recommended. Please upgrade.  Aborting.'$NC; exit 1; }
+command rsync -n --info=progress2 rsync-3.1.2-5.fc26.x86_64.rpm /dev/null >/dev/null 2>&1 || { echo -e >&2 $RED'This version of rsync is not supported. Version 3.1.1+ is recommended. Please upgrade.  Aborting.'$NC; exit 1; }
 command -v createrepo >/dev/null 2>&1 || { echo -e >&2 $RED'createrepo is not installed.  Aborting.'$NC; exit 1; }
 command -v genisoimage >/dev/null 2>&1 || { echo -e >&2 $RED'genisoimage is not installed.  Aborting.'$NC; exit 1; }
 
