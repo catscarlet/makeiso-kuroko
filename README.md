@@ -8,52 +8,66 @@ This only works for CentOS-7.3.1611.
 
 ## Requirement
 
-- An avaliable Linux platform. CentOS 7 is prefered, but Ubuntu is also OK.
+- An avaliable Linux platform. CentOS 7 is prefered.
 - A CentOS-7-x86_64-Everything-1611.iso image
 - genisoimage (A RPM package is included in Everything 1611 iso image)
 - createrepo (A RPM package is included in Everything 1611 iso image)
-- rsync 3.1.1+ (not included in Everything 1611 iso image. A RPM package is included in this repository)
+- rsync 3.1.1+ (not included in Everything 1611 iso image. A version 3.1.2 of rsync RPM package is included in this repository)
 
 ## Usage
 
-Basic order:
+Recommend order:
 
 1. Modify the GLOBAL VARIABLE if needed.
-2. Copy addtional files you want to install after the system installation to `PAYLOAD_PATH`, and write a install.sh as the installation script. Please notice **NO INTERACTIVE OPERATION IS ALLOWED**.
-3. Run makeiso.sh to generate iso file.
+2. Copy addtional files to `PAYLOAD_PATH` with a install.sh as the installation script, which you want to install after the system installed. Please notice **NO INTERACTIVE OPERATION IS ALLOWED**.
+3. Run makeiso.sh to generate iso file. (Superuser is required because going to mount iso)
 
 ### GLOBAL VARIABLE
 
 ```
 # INPUT
-CENTOS7_EVERYTHING_ISO="/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso"
-PAYLOAD_PATH="/root/payload_sample/"
+CENTOS7_EVERYTHING_ISO='/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso'
+CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything/'
+PAYLOAD_PATH='./payload_sample/'
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
-OUTPUTFILEDIR="./"
-VERSION="v1.0.0"
-VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+OUTPUTFILEDIR='./'
+VERSION='v1.0.0'
 TIMEZONE='UTC'
 
-# AUTO VARIABLE
+# Auto generated variables
+VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
 VOLUMENAME_LABEL=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 ```
 
-- **CENTOS7_EVERYTHING_ISO** MUST be a accessiable CentOS-7-x86_64-Everything-1611.iso files.
-- **PAYLOAD_PATH** is addtional files you want to install after the system installation. After the system installation and auto reboot, `bash install.sh` will be execute automatically once.
-- **VOLUMENAME_LABEL** is for Volume ID and it only support as long as 16 chars.
+- **CENTOS7_EVERYTHING_ISO** Must be a accessiable CentOS-7-x86_64-Everything-1611.iso files.
+- **PAYLOAD_PATH** is the addtional files you want to install after the system installation. After the system installation and auto reboot, `bash install.sh` will execute automatically once.
+- **VOLUMENAME_LABEL** is for Volume ID and it only supports as long as 16 chars.
 
 ### Usage
 
 ```
-Usage: ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_sample/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
+Usage: # ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_sample/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
 ```
+
+Example 1：
+
+`# ./makeiso.sh -7 /root/cifs/CentOS/CentOS-7-x86_64-Everything-1611.iso`
+
+Example 2：
+
+`# ./makeiso.sh -d /root/ -v test20200331 -s ./payload_sample/ -7 /root/cifs/CentOS/CentOS-7-x86_64-Everything-1611/CentOS-7-x86_64-Everything-1611.iso -z 'Asia/Shanghai'`
 
 And you will get a ISO file. The default root password is 'makeiso-kuroko'.
 
+**To set the root password, please refer to [rootpw - Set Root Password](https://docs.fedoraproject.org/en-US/Fedora/html/Installation_Guide/sect-kickstart-commands-rootpw.html)**
+
+
 **Notice that all the network interfaces DHCP are enabled in kickstart-post-script. Your network configuration in the Install Guide won't work.**
+
+**There is no config about installation destination in kickstart-post. You still need to select the installation destination**
 
 * * *
 
@@ -68,18 +82,21 @@ And you will get a ISO file. The default root password is 'makeiso-kuroko'.
 │   └── develop
 │       ├── EFI
 │       │   └── BOOT
-│       │       └── grub.cfg
+│       │       ├── grub.cfg
+│       │       └── x86_64-efi
+│       │           └── gfxterm_background.mod
 │       └── isolinux
 │           ├── isolinux.cfg
-│           └── payload-develop.cfg
+│           ├── payload-develop.cfg
+│           ├── splash.png
 ├── d918936f5019be3fb66e9981a28cb2a41477a2963d741d454f79377a22214f43-c7-x86_64-comps.xml
 ├── filelist
 │   ├── centos_dvd_frame.list
 │   └── minimal.list
 ├── generatefilelist.sh
 ├── makeiso.sh
-├── README_cn.md
-├── README.md
+├── payload_sample
+│   └── install.sh
 └── rsync-3.1.2-5.fc26.x86_64.rpm
 ```
 
@@ -157,6 +174,7 @@ And you will get a ISO file. The default root password is 'makeiso-kuroko'.
 │   ├── install.sh
 │   └── *
 ├── payload_install.log
+├── payload_log_sample.log
 └── rpm_qa.list
 ```
 
@@ -168,6 +186,7 @@ And you will get a ISO file. The default root password is 'makeiso-kuroko'.
 - initstart.log, the log of `initstart.sh`
 - PAYLOAD, Your PAYLOAD
 - payload_install.log, the log of PAYLOAD/install.sh
+- payload_log_sample.log，the output of PAYLOAD/install.sh if you used the default payload_sample
 - rpm_qa_develop.list, the result of 'rpm -qa' when the whole installation is finished.
 
 ## Build your own ISO
@@ -182,9 +201,7 @@ This project is just for helping developers who don't familiar how to buid a Cen
 
 ## Other things
 
-### Todo list
 
-- Print logs not only in log file, but also in tty.
 
 ### Idea about naming this 'make linux iso project' Kuroko
 
@@ -196,10 +213,16 @@ I folk project to another team of my company ,and named it 'Payload'. This word 
 
 Butt weight, The word 'Payload' in Team Fortress 2 also means BOMB! Because after I read the code and the project of the other team, I thought those would be a BOMB, it would explode at anytime. ["Bomb is friend! Come, visit friend!"](https://wiki.teamfortress.com/w/images/2/2b/Heavy_cartstaycloseoffense06.wav)
 
+### Todo list
+
+- Print logs not only in log file, but also in tty
+- Replace rc.local using Systemd
+
 ## References
 
 - [GRUB 2 Custom Splash Screen on RHEL 7 UEFI and Legacy ISO Image](http://www.tuxfixer.com/set-grub2-custom-splash-screen-on-rhel-7-centos-7-uefi-and-legacy-bios-iso-image/)
 - [Grub2/Displays](https://help.ubuntu.com/community/Grub2/Displays#Troubleshooting_Splash_Images)
+- [rootpw - Set Root Password](https://docs.fedoraproject.org/en-US/Fedora/html/Installation_Guide/sect-kickstart-commands-rootpw.html)
 
 ## Contribution
 
@@ -207,7 +230,7 @@ Any contributions are welcome. Pull request to branch **dev** please.
 
 ## License
 
-Makeiso-Kuroko is licensed under MIT License.
+Makeiso-Kuroko is licensed under Anti-996-License, which is adapted from the MIT license.
 
 The default splash image is from ["Toaru Kagaku no Railgun - Shirai Kuroko" by Krukmeister](https://krukmeister.deviantart.com/art/Toaru-Kagaku-no-Railgun-Shirai-Kuroko-369206997) and it's licensed under a
 [Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 License](http://creativecommons.org/licenses/by-nc-nd/3.0/).
