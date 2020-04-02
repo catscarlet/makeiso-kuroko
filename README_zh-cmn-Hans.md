@@ -6,6 +6,10 @@
 
 本脚本只针对于 CentOS-7.3.1611。
 
+## Screenshot
+
+![makeiso-kuroko screenshot](screenshot.png "makeiso-kuroko screenshot")
+
 ## 依赖
 
 - 可用的 Linux 操作系统。建议使用 CentOS 7

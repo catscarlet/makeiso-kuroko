@@ -6,6 +6,10 @@ This is a tool for making CentOS-7.3.1611 ISO for your own purpose.
 
 This only works for CentOS-7.3.1611.
 
+## Screenshot
+
+![makeiso-kuroko screenshot](screenshot.png "makeiso-kuroko screenshot")
+
 ## Requirement
 
 - An avaliable Linux platform. CentOS 7 is prefered.
