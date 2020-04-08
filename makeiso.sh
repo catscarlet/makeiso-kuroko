@@ -7,11 +7,12 @@ cd $(dirname $(readlink -f $0))
 
 # INPUT
 CENTOS7_EVERYTHING_ISO='/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso'
-CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything/'
+CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything-1611/'
 PAYLOAD_PATH='./payload_sample/'
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
+NAMEPREFIX='PAYLOAD'
 OUTPUTFILEDIR='./'
 VERSION='v1.0.0'
 TIMEZONE='UTC'
@@ -24,7 +25,7 @@ ISOTMP='./iso_tmp'
 
 usage()
 {
-    echo "Usage: $0 -d [DEST_DIR=$OUTPUTFILEDIR] -v [RELEASE_VERSION=$VERSION] -s [PAYLOAD_PATH=$PAYLOAD_PATH] -7 [CENTOS7_EVERYTHING_ISO=$CENTOS7_EVERYTHING_ISO] -z [TIMEZONE=$TIMEZONE]" >&2
+    echo "Usage: $0 -n [NAMEPREFIX=$NAMEPREFIX] -d [DEST_DIR=$OUTPUTFILEDIR] -v [RELEASE_VERSION=$VERSION] -s [PAYLOAD_PATH=$PAYLOAD_PATH] -7 [CENTOS7_EVERYTHING_ISO=$CENTOS7_EVERYTHING_ISO] -z [TIMEZONE=$TIMEZONE]" >&2
     exit 1
 }
 
@@ -33,9 +34,12 @@ print_horizontal_line()
     printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 }
 
-while getopts 'd:v:s:7:z:h' arg
+while getopts 'n:d:v:s:7:z:h' arg
 do
     case $arg in
+        n)
+            NAMEPREFIX=$OPTARG
+            ;;
         d)
             OUTPUTFILEDIR=$OPTARG
             ;;
@@ -65,17 +69,16 @@ do
 done
 
 # Auto generated variables
-VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M%S'`-$VERSION
+VOLUMENAME=$NAMEPREFIX'-'`date +'%Y%m%d%H%M%S'`'-'$VERSION
 VOLUMENAME_LABEL=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 
 # Before start. Check environment
 echo ''
 command -v rsync >/dev/null 2>&1 || { echo -e >&2 $RED'rsync is not installed.  Aborting.'$NC; exit 1; }
-command rsync -n --info=progress2 rsync-3.1.2-5.fc26.x86_64.rpm /dev/null >/dev/null 2>&1 || { echo -e >&2 $RED'This version of rsync is not supported. Version 3.1.1+ is recommended. Please upgrade.  Aborting.'$NC; exit 1; }
+command rsync -n --info=progress2 makeiso.sh /dev/null >/dev/null 2>&1 || { echo -e >&2 $RED'This version of rsync is not supported. Version 3.1.1+ is recommended. Please upgrade.  Aborting.'$NC; exit 1; }
 command -v createrepo >/dev/null 2>&1 || { echo -e >&2 $RED'createrepo is not installed.  Aborting.'$NC; exit 1; }
 command -v genisoimage >/dev/null 2>&1 || { echo -e >&2 $RED'genisoimage is not installed.  Aborting.'$NC; exit 1; }
-
 
 # Start
 mkdir -p ${CENTOS7_EVERYTHING_ISO_MOUNTPOINT}/
@@ -94,7 +97,7 @@ echo -e $GREEN Start to generate $FINALNAME at  `date -d "1970-01-01 UTC $STARTT
 print_horizontal_line
 echo 'Clear ISO temporary files at '${ISOTMP}'.'
 rm -rf ${ISOTMP}
-echo 'Copy CentOS7 DVD framework'
+echo 'Copy ISO framework'
 mkdir -p ${ISOTMP}/Packages
 mkdir -p ${ISOTMP}/repodata
 mkdir -p ${ISOTMP}/PAYLOAD
@@ -102,7 +105,6 @@ rsync -au --info=progress2 ${CENTOS7_EVERYTHING_ISO_MOUNTPOINT}/isolinux iso_tmp
 xargs -n 1 -i cp -rs ${CENTOS7_EVERYTHING_ISO_MOUNTPOINT}/{} ${ISOTMP} < ./filelist/centos_dvd_frame.list
 
 echo -e 'Copy(Actually it'"'"'s "make symbolic links") minimal packages from CentOS7 DVD'
-#rsync -a --info=progress2 --files-from=./filelist/minimal.list ${CENTOS7_EVERYTHING_ISO_MOUNTPOINT}/Packages ${ISOTMP}/Packages
 xargs -n 1 -i cp -s ${CENTOS7_EVERYTHING_ISO_MOUNTPOINT}/Packages/{} ${ISOTMP}/Packages < ./filelist/minimal.list
 
 echo 'Copy rsync-3.1.2-5.fc26.x86_64.rpm'
