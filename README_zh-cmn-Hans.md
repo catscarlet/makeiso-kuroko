@@ -12,7 +12,7 @@
 
 ## 依赖
 
-- 可用的 Linux 操作系统。建议使用 CentOS 7
+- 可用的 Linux 操作系统。建议使用 CentOS 7.5.1804 或更新版本，因为其默认包含 rsync 3.1.1+
 - CentOS-7-x86_64-Everything-1611.iso 光盘镜像
 - genisoimage （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
 - createrepo （包含在 CentOS-7-x86_64-Everything-1611 光盘镜像中）
@@ -31,17 +31,18 @@
 ```
 # INPUT
 CENTOS7_EVERYTHING_ISO='/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso'
-CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything/'
+CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything-1611/'
 PAYLOAD_PATH='./payload_sample/'
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
+NAMEPREFIX='PAYLOAD'
 OUTPUTFILEDIR='./'
 VERSION='v1.0.0'
 TIMEZONE='UTC'
 
 # Auto generated variables
-VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+VOLUMENAME=$NAMEPREFIX'-'`date +'%Y%m%d%H%M%S'`'-'$VERSION
 VOLUMENAME_LABEL=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 ```

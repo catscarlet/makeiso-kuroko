@@ -12,7 +12,7 @@ This only works for CentOS-7.3.1611.
 
 ## Requirement
 
-- An avaliable Linux platform. CentOS 7 is prefered.
+- An avaliable Linux platform. CentOS 7.5.1804 or newer is recommended because it includes rsync 3.1.1+
 - A CentOS-7-x86_64-Everything-1611.iso image
 - genisoimage (A RPM package is included in Everything 1611 iso image)
 - createrepo (A RPM package is included in Everything 1611 iso image)
@@ -31,17 +31,18 @@ Recommend order:
 ```
 # INPUT
 CENTOS7_EVERYTHING_ISO='/tmp/mountpoint/samba/share/CentOS-7-x86_64-Everything-1611.iso'
-CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything/'
+CENTOS7_EVERYTHING_ISO_MOUNTPOINT='/tmp/mountpoint/CentOS7-Everything-1611/'
 PAYLOAD_PATH='./payload_sample/'
 CONFIGDIR='boot.template/develop/'
 
 # OUTPUT
+NAMEPREFIX='PAYLOAD'
 OUTPUTFILEDIR='./'
 VERSION='v1.0.0'
 TIMEZONE='UTC'
 
 # Auto generated variables
-VOLUMENAME='PAYLOAD-'`date +'%Y%m%d%H%M'`-$VERSION
+VOLUMENAME=$NAMEPREFIX'-'`date +'%Y%m%d%H%M%S'`'-'$VERSION
 VOLUMENAME_LABEL=`expr substr ${VOLUMENAME} 1 16`
 FINALNAME=${VOLUMENAME}.iso
 ```
@@ -56,18 +57,17 @@ FINALNAME=${VOLUMENAME}.iso
 Usage: # ./makeiso.sh -d [DEST_DIR=./] -v [RELEASE_VERSION=v1.0.0] -s [PAYLOAD_PATH=/root/payload_sample/] -7 [CENTOS7_EVERYTHING_ISO=/root/iso/CentOS-7-x86_64-Everything-1611.iso] -z [TIMEZONE=UTC]
 ```
 
-Example 1：
+Example 1:
 
 `# ./makeiso.sh -7 /root/cifs/CentOS/CentOS-7-x86_64-Everything-1611.iso`
 
-Example 2：
+Example 2:
 
 `# ./makeiso.sh -d /root/ -v test20200331 -s ./payload_sample/ -7 /root/cifs/CentOS/CentOS-7-x86_64-Everything-1611/CentOS-7-x86_64-Everything-1611.iso -z 'Asia/Shanghai'`
 
 And you will get a ISO file. The default root password is 'makeiso-kuroko'.
 
 **To set the root password, please refer to [rootpw - Set Root Password](https://docs.fedoraproject.org/en-US/Fedora/html/Installation_Guide/sect-kickstart-commands-rootpw.html)**
-
 
 **Notice that all the network interfaces DHCP are enabled in kickstart-post-script. Your network configuration in the Install Guide won't work.**
 
@@ -92,7 +92,7 @@ And you will get a ISO file. The default root password is 'makeiso-kuroko'.
 │       └── isolinux
 │           ├── isolinux.cfg
 │           ├── payload-develop.cfg
-│           ├── splash.png
+│           └── splash.png
 ├── d918936f5019be3fb66e9981a28cb2a41477a2963d741d454f79377a22214f43-c7-x86_64-comps.xml
 ├── filelist
 │   ├── centos_dvd_frame.list
@@ -204,7 +204,6 @@ This project includes a comps.xml `d918936f5019be3fb66e9981a28cb2a41477a2963d741
 This project is just for helping developers who don't familiar how to buid a CentOS ISO. You should write Kickstart-file (payload-develop.cfg) for your own project purpose.
 
 ## Other things
-
 
 
 ### Idea about naming this 'make linux iso project' Kuroko
