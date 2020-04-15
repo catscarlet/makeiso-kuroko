@@ -8,7 +8,13 @@
 
 ## Screenshot
 
-![makeiso-kuroko screenshot](screenshot.png "makeiso-kuroko screenshot")
+### BIOS 模式
+
+![makeiso-kuroko bios screenshot](screenshot_bios.png "makeiso-kuroko bios screenshot")
+
+### UEFI 模式
+
+![makeiso-kuroko uefi screenshot](screenshot_uefi.png "makeiso-kuroko uefi screenshot")
 
 ## 依赖
 

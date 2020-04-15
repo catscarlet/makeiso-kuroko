@@ -8,7 +8,13 @@ This only works for CentOS-7.3.1611.
 
 ## Screenshot
 
-![makeiso-kuroko screenshot](screenshot.png "makeiso-kuroko screenshot")
+### In BIOS mode
+
+![makeiso-kuroko screenshot](screenshot_bios.png "makeiso-kuroko screenshot")
+
+### In UEFI mode
+
+![makeiso-kuroko screenshot](screenshot_uefi.png "makeiso-kuroko screenshot")
 
 ## Requirement
 
